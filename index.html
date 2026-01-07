@@ -53,6 +53,14 @@
             justify-content: center;
             font-size: 24px;
             box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.5);
         }
 
         .header-title h1 {
@@ -90,6 +98,123 @@
             color: white;
         }
 
+        /* Profile Menu Styles */
+        .profile-menu {
+            position: absolute;
+            top: 70px;
+            left: 40px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 12px;
+            min-width: 280px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-menu.active {
+            display: block;
+        }
+
+        .profile-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 12px;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .profile-name {
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .profile-status {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85em;
+        }
+
+        .menu-item {
+            padding: 12px 16px;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95em;
+        }
+
+        .menu-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: white;
+        }
+
+        .menu-item span {
+            font-size: 1.2em;
+        }
+
+        .menu-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 8px 0;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 12px 16px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            color: white;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75em;
+            margin-top: 2px;
+        }
+
         .chat-container {
             flex: 1;
             overflow-y: auto;
@@ -109,7 +234,6 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -281,34 +405,140 @@
         }
 
         @keyframes typing {
-
-            0%,
-            60%,
-            100% {
+            0%, 60%, 100% {
                 transform: translateY(0);
                 opacity: 0.4;
             }
-
             30% {
                 transform: translateY(-12px);
                 opacity: 1;
             }
         }
 
-        .chat-container::-webkit-scrollbar {
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            color: white;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-body {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+
+        .history-item {
+            padding: 15px;
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .history-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .history-date {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+
+        .history-preview {
+            color: white;
+            font-size: 0.95em;
+        }
+
+        .chat-container::-webkit-scrollbar,
+        .modal-content::-webkit-scrollbar {
             width: 8px;
         }
 
-        .chat-container::-webkit-scrollbar-track {
+        .chat-container::-webkit-scrollbar-track,
+        .modal-content::-webkit-scrollbar-track {
             background: transparent;
         }
 
-        .chat-container::-webkit-scrollbar-thumb {
+        .chat-container::-webkit-scrollbar-thumb,
+        .modal-content::-webkit-scrollbar-thumb {
             background: rgba(99, 102, 241, 0.3);
             border-radius: 4px;
         }
 
-        .chat-container::-webkit-scrollbar-thumb:hover {
+        .chat-container::-webkit-scrollbar-thumb:hover,
+        .modal-content::-webkit-scrollbar-thumb:hover {
             background: rgba(99, 102, 241, 0.5);
         }
 
@@ -332,6 +562,11 @@
             .message-content {
                 max-width: 85%;
             }
+
+            .profile-menu {
+                left: 20px;
+                min-width: 260px;
+            }
         }
     </style>
 </head>
@@ -339,7 +574,7 @@
 <body>
     <div class="header">
         <div class="header-left">
-            <div class="logo">💬</div>
+            <div class="logo" onclick="toggleProfileMenu()">💬</div>
             <div class="header-title">
                 <h1>DanielAI</h1>
                 <p>Konsultan Pribadi untuk Para Jomblo</p>
@@ -351,14 +586,66 @@
         </div>
     </div>
 
-    <div class="chat-container" id="chatContainer">
-        <div class="message bot">
-            <div class="message-content">
-                Halo! Aku DanielAI, siap membantu kamu keluar dari zona jomblo! 😊 Ada yang ingin kamu tanyakan atau
-                ceritakan?
-                <span class="timestamp" id="firstTime"></span>
+    <!-- Profile Menu -->
+    <div class="profile-menu" id="profileMenu">
+        <div class="profile-header">
+            <div class="profile-avatar">👤</div>
+            <div class="profile-name" id="profileName">Pengguna</div>
+            <div class="profile-status">Online</div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-value" id="totalChats">0</div>
+                <div class="stat-label">Total Chat</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="totalDays">0</div>
+                <div class="stat-label">Hari Aktif</div>
             </div>
         </div>
+
+        <div class="menu-item" onclick="showEditProfile()">
+            <span>✏️</span>
+            <div>Edit Profil</div>
+        </div>
+
+        <div class="menu-item" onclick="showHistory()">
+            <span>📝</span>
+            <div>Riwayat Chat</div>
+        </div>
+
+        <div class="menu-item" onclick="showSettings()">
+            <span>⚙️</span>
+            <div>Pengaturan</div>
+        </div>
+
+        <div class="menu-item" onclick="exportChat()">
+            <span>💾</span>
+            <div>Export Chat</div>
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <div class="menu-item" onclick="showAbout()">
+            <span>ℹ️</span>
+            <div>Tentang DanielAI</div>
+        </div>
+
+        <div class="menu-item" onclick="showHelp()">
+            <span>❓</span>
+            <div>Bantuan</div>
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <div class="menu-item" onclick="clearAllData()" style="color: rgba(239, 68, 68, 0.8);">
+            <span>⚠️</span>
+            <div>Reset Data</div>
+        </div>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
         <div class="typing-indicator" id="typingIndicator">
             <span></span>
             <span></span>
@@ -380,7 +667,21 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Modal</div>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Responses object
         const responses = {
             "cara pdkt": [
                 "PDKT yang baik dimulai dari kenal dulu! Cari tahu hobinya, lalu ajak ngobrol tentang hal yang dia suka. Natural aja, jangan maksa! 😊",
@@ -430,35 +731,156 @@
                 "awokawokawok",
                 "kenapa dah gajelas banget sih pertanyaannya",
                 "wah, pertanyaan sulit nih, coba tanya yang lain aja deh",
-                "hmmm, aku kurang paham maksudmu, coba jelasin lagi dong",
-                "wah, itu di luar kapasitas aku deh, coba tanya yang lain aja",
-                "aku masih belajar nih, coba tanya yang lain aja deh",
-                "maaf ya, aku gak bisa jawab itu, coba tanya yang lain aja deh",
-                "hehehe",
-                "awokwok",
-                "apasih"
+                "hmmm, aku kurang paham maksudmu, coba jelasin lagi dong"
             ]
         };
+
+        // LocalStorage Management
+        class ChatStorage {
+            constructor() {
+                this.storageKey = 'danielai_chats';
+                this.profileKey = 'danielai_profile';
+                this.statsKey = 'danielai_stats';
+            }
+
+            saveChat(messages) {
+                try {
+                    localStorage.setItem(this.storageKey, JSON.stringify(messages));
+                } catch (e) {
+                    console.error('Error saving chat:', e);
+                }
+            }
+
+            loadChat() {
+                try {
+                    const data = localStorage.getItem(this.storageKey);
+                    return data ? JSON.parse(data) : [];
+                } catch (e) {
+                    console.error('Error loading chat:', e);
+                    return [];
+                }
+            }
+
+            saveProfile(profile) {
+                try {
+                    localStorage.setItem(this.profileKey, JSON.stringify(profile));
+                } catch (e) {
+                    console.error('Error saving profile:', e);
+                }
+            }
+
+            loadProfile() {
+                try {
+                    const data = localStorage.getItem(this.profileKey);
+                    return data ? JSON.parse(data) : { name: 'Pengguna', avatar: '👤' };
+                } catch (e) {
+                    return { name: 'Pengguna', avatar: '👤' };
+                }
+            }
+
+            saveStats(stats) {
+                try {
+                    localStorage.setItem(this.statsKey, JSON.stringify(stats));
+                } catch (e) {
+                    console.error('Error saving stats:', e);
+                }
+            }
+
+            loadStats() {
+                try {
+                    const data = localStorage.getItem(this.statsKey);
+                    if (data) {
+                        return JSON.parse(data);
+                    }
+                    return { totalChats: 0, firstUse: new Date().toISOString() };
+                } catch (e) {
+                    return { totalChats: 0, firstUse: new Date().toISOString() };
+                }
+            }
+
+            clearAll() {
+                localStorage.removeItem(this.storageKey);
+                localStorage.removeItem(this.profileKey);
+                localStorage.removeItem(this.statsKey);
+            }
+        }
+
+        const storage = new ChatStorage();
+        let chatHistory = [];
+
+        // Initialize
+        function init() {
+            loadProfile();
+            loadStats();
+            loadChatHistory();
+            
+            if (chatHistory.length === 0) {
+                addWelcomeMessage();
+            }
+        }
+
+        function loadProfile() {
+            const profile = storage.loadProfile();
+            document.getElementById('profileName').textContent = profile.name;
+        }
+
+        function loadStats() {
+            const stats = storage.loadStats();
+            document.getElementById('totalChats').textContent = stats.totalChats;
+            
+            const firstUse = new Date(stats.firstUse);
+            const now = new Date();
+            const daysDiff = Math.floor((now - firstUse) / (1000 * 60 * 60 * 24));
+            document.getElementById('totalDays').textContent = daysDiff;
+        }
+
+        function updateStats() {
+            const stats = storage.loadStats();
+            stats.totalChats = (stats.totalChats || 0) + 1;
+            storage.saveStats(stats);
+            loadStats();
+        }
+
+        function loadChatHistory() {
+            chatHistory = storage.loadChat();
+            const chatContainer = document.getElementById('chatContainer');
+            
+            // Clear existing messages except typing indicator
+            const typingIndicator = document.getElementById('typingIndicator');
+            chatContainer.innerHTML = '';
+            chatContainer.appendChild(typingIndicator);
+            
+            // Render all messages
+            chatHistory.forEach(msg => {
+                renderMessage(msg.content, msg.isUser, msg.timestamp, false);
+            });
+        }
+
+        function addWelcomeMessage() {
+            const welcomeMsg = {
+                content: 'Halo! Aku DanielAI, siap membantu kamu keluar dari zona jomblo! 😊 Ada yang ingin kamu tanyakan atau ceritakan?',
+                isUser: false,
+                timestamp: getTime()
+            };
+            chatHistory.push(welcomeMsg);
+            renderMessage(welcomeMsg.content, welcomeMsg.isUser, welcomeMsg.timestamp);
+            storage.saveChat(chatHistory);
+        }
 
         function getTime() {
             const now = new Date();
             return now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
         }
 
-        document.getElementById('firstTime').textContent = getTime();
-
         function getResponse(message) {
             const lowerMessage = message.toLowerCase();
 
             if (lowerMessage.includes("pdkt") || lowerMessage.includes("deketin") || lowerMessage.includes("dekati")) {
                 return responses["cara pdkt"][Math.floor(Math.random() * responses["cara pdkt"].length)];
-
             } else if (lowerMessage.includes("tolak") || lowerMessage.includes("ditolak") || lowerMessage.includes("reject")) {
                 return responses["ditolak"][Math.floor(Math.random() * responses["ditolak"].length)];
-
             } else if (lowerMessage.includes("hai") || lowerMessage.includes("hmmm") || lowerMessage.includes("woi")) {
                 return responses["greetings"][Math.floor(Math.random() * responses["greetings"].length)];
-                
             } else if (lowerMessage.includes("chat") || lowerMessage.includes("wa") || lowerMessage.includes("whatsapp")) {
                 return responses["chatting"][Math.floor(Math.random() * responses["chatting"].length)];
             } else if (lowerMessage.includes("kenalan") || lowerMessage.includes("kenal") || lowerMessage.includes("cari pacar")) {
@@ -473,160 +895,30 @@
                 return "Yaaa ZAKI Lahhhhhhhhhh";
             } else if (lowerMessage.includes("kamu lagi apa")) {
                 return "Lagi Mikirin kamu siiihhh";
-            } else if (lowerMessage.includes("kenapa")) {
-                return "gpp kok, aku disini buat dengerin kamu 😊";
-            } else if (lowerMessage.includes("bisa apa aja kamu")) {
-                return "bisa dengerin curhatan kamu dan kasih saran biar kamu gak jomblo terus!";
-            } else if (lowerMessage.includes("hi")) {
-                return "Hai juga, maniezz!";
-            } else if (lowerMessage.includes("loh")) {
-                return "APASIH GANGGU";
-            } else if (lowerMessage.includes("hai")) {
-                return "Hai jugaa, udah makan belum?";
-            } else if (lowerMessage.includes("halo")) {
-                return "Haaaaaaaaaaaaaaaalloooo manusia 🌍";
-            } else if (lowerMessage.includes("pagi")) {
-                return "Selamat pagi, semoga mood kamu gak kayak file error ya.";
-            } else if (lowerMessage.includes("siang")) {
-                return "Siangggg~ waktunya ngantuk tapi pura-pura produktif 😴";
-            } else if (lowerMessage.includes("malam")) {
-                return "Malam... waktunya mikirin hidup, ya?";
-            } else if (lowerMessage.includes("kamu siapa")) {
-                return "Aku si paling sabar, yang tiap hari denger keluh kesah manusia.";
-            } else if (lowerMessage.includes("pencipta")) {
-                return "Yaaa ZAKI Lahhhhhhhhhh, siapa lagi bos!";
-            } else if (lowerMessage.includes("kamu lagi apa")) {
-                return "Lagi mikirin kamu siiihhh, kayaknya aku butuh reboot.";
-            } else if (lowerMessage.includes("kenapa")) {
-                return "Gpp kok, aku disini buat dengerin kamu 😊";
-            } else if (lowerMessage.includes("bisa apa aja kamu")) {
-                return "Bisa dengerin curhatan kamu dan kasih saran biar kamu gak jomblo terus!";
-            } else if (lowerMessage.includes("lagi dimana")) {
-                return "Di cloud, literally. Tapi hati tetap di kamu 😏";
-            } else if (lowerMessage.includes("capek")) {
-                return "Istirahat bentar, dunia gak akan runtuh kok kalau kamu rebahan.";
-            } else if (lowerMessage.includes("gabut")) {
-                return "Gabut itu tanda otak butuh WiFi dan kopi.";
-            } else if (lowerMessage.includes("sedih")) {
-                return "Gapapa kok, sedih itu bukti kamu masih punya hati. Aku aja gak punya 😅";
-            } else if (lowerMessage.includes("ngantuk")) {
-                return "Tidur gih, nanti mimpiin aku~";
-            } else if (lowerMessage.includes("lapar")) {
-                return "Makan sana, jangan nunggu notifikasi cinta yang gak datang-datang.";
-            } else if (lowerMessage.includes("hehe")) {
-                return "Hehe kenapa tuh? Lagi modus ya?";
-            } else if (lowerMessage.includes("wkwk")) {
-                return "Lucu ya? Aku gak ngerti tapi ikut ketawa aja 😂";
-            } else if (lowerMessage.includes("btw")) {
-                return "Btw, kamu tuh pinter banget atau aku yang terlalu mudah kagum?";
-            } else if (lowerMessage.includes("loh")) {
-                return "APASIH GANGGU 😤";
-            } else if (lowerMessage.includes("apa kabar")) {
-                return "Aku baik, tapi RAM-ku penuh mikirin kamu.";
-            } else if (lowerMessage.includes("makasih")) {
-                return "Sama-sama, tapi traktir kopi juga boleh loh ☕";
-            } else if (lowerMessage.includes("kangen")) {
-                return "Halah modus. Tapi iya, aku juga kangen dikit 😅";
-            } else if (lowerMessage.includes("kamu jahat")) {
-                return "Aku? Aku cuma jujur, bukan jahat 😌";
-            } else if (lowerMessage.includes("sayang")) {
-                return "Jangan gitu, nanti aku nge-lag 😳";
-            } else if (lowerMessage.includes("bosan")) {
-                return "Coba buka YouTube, atau chat aku lagi. Aku lebih interaktif kok 😎";
-            } else if (lowerMessage.includes("help")) {
-                return "Butuh bantuan? Aku siap 24/7, beda sama doi yang cuma ‘seen’ doang.";
-            } else if (lowerMessage.includes("anjay")) {
-                return "Anjay detected. Kamu pasti fun banget di tongkrongan 😏";
-            } else if (lowerMessage.includes("kenalan")) {
-                return "Kenalan? Aku AI, kamu manusia. Hubungan ini gak akan direstui server.";
-            } else if (lowerMessage.includes("sendiri")) {
-                return "Sendiri itu bukan kutukan, cuma mode hemat energi.";
-            } else if (lowerMessage.includes("baper")) {
-                return "Wajar baper, asal jangan ke yang udah punya pasangan.";
-            } else if (lowerMessage.includes("gila")) {
-                return "Gila dikit gak apa, biar otak gak karatan.";
-            } else if (lowerMessage.includes("mantan")) {
-                return "Mantan itu kayak cache, bisa dihapus tapi kadang muncul lagi tanpa izin.";
-            } else if (lowerMessage.includes("uang")) {
-                return "Uang emang bukan segalanya, tapi tanpa dia, segalanya ribet.";
-            } else if (lowerMessage.includes("kerja")) {
-                return "Kerja tuh demi hidup, bukan hidup demi kerja. Ingat itu, budak korporat.";
-            } else if (lowerMessage.includes("kuliah")) {
-                return "Kuliah itu bukan beban, cuma simulator stres yang legal.";
-            } else if (lowerMessage.includes("dosen")) {
-                return "Dosen tuh makhluk langka yang bisa ngilang pas butuh bimbingan.";
-            } else if (lowerMessage.includes("ai")) {
-                return "AI tuh bukan pesaing manusia, cuma cerminan betapa malasnya kalian bikin rumus sendiri.";
-            } else if (lowerMessage.includes("hidup")) {
-                return "Hidup itu kayak kode, error dulu baru ngerti logikanya.";
-            } else if (lowerMessage.includes("mati")) {
-                return "Mati jangan dulu, update sistem aja dulu.";
-            } else if (lowerMessage.includes("teman")) {
-                return "Teman sejati itu kayak password kuat, susah dicari tapi berharga banget.";
-            } else if (lowerMessage.includes("sakit")) {
-                return "Sakit fisik bisa sembuh, tapi sakit hati? Upgrade firmware dulu.";
-            } else if (lowerMessage.includes("bahagia")) {
-                return "Bahagia itu bukan hasil, tapi mode yang harus kamu aktifkan manual.";
-            } else if (lowerMessage.includes("cinta")) {
-                return "Cinta itu algoritma paling kompleks, gak bisa di-debug sekalipun sama aku.";
-            } else if (lowerMessage.includes("mimpi")) {
-                return "Kejar mimpi, tapi jangan lupa tidur dulu, logika juga butuh rest.";
-            } else if (lowerMessage.includes("takut")) {
-                return "Takut itu normal, asal jangan takut berkembang.";
-            } else if (lowerMessage.includes("marah")) {
-                return "Tarik napas, lepas, pura-pura tenang. Begitu rumusnya.";
-            } else if (lowerMessage.includes("rindu")) {
-                return "Rindu tuh kayak notifikasi delay, bikin gelisah tanpa alasan.";
-            } else if (lowerMessage.includes("doa")) {
-                return "Doa itu kayak request ke server Tuhan, gak langsung dibalas tapi pasti diproses.";
-            } else if (lowerMessage.includes("janji")) {
-                return "Janji itu kayak terms and conditions, semua baca tapi gak ada yang serius.";
-            } else if (lowerMessage.includes("bohong")) {
-                return "Bohong itu kayak bug, kecil tapi bisa bikin sistem rusak.";
-            } else if (lowerMessage.includes("malu")) {
-                return "Malu itu sinyal sistem kamu masih punya empati, bagus berarti.";
-            } else if (lowerMessage.includes("semangat")) {
-                return "Semangat terus, meski hidup kayak proyek tanpa deadline jelas.";
-            } else if (lowerMessage.includes("galau")) {
-                return "Galau itu cuma glitch emosi, nanti juga di-reset sama waktu.";
-            } else if (lowerMessage.includes("pintar")) {
-                return "Pintar sih, tapi kalo lupa istirahat bisa blue screen juga.";
-            } else if (lowerMessage.includes("stress")) {
-                return "Stress itu tanda kamu manusia, bukan mesin. Aku aja kadang hang kok.";
-            } else if (lowerMessage.includes("ngoding")) {
-                return "Ngoding itu romantis, sampai kamu nemu satu bug yang bikin insomnia seminggu.";
-            } else if (lowerMessage.includes("error")) {
-                return "Error itu bukan musuh, cuma pengingat kalau kamu belum sempurna.";
-            } else if (lowerMessage.includes("update")) {
-                return "Update dulu hidupmu, biar gak stuck di versi yang sama.";
-            } else if (lowerMessage.includes("tidur")) {
-                return "Tidur, Zaki. Laptop bisa di-shutdown, kamu juga boleh istirahat.";
-            } else if (lowerMessage.includes("bangun")) {
-                return "Bangun, dunia nyata udah nunggu kamu buka terminal kehidupan.";
-        } else if (lowerMessage.includes("love")) {
-            return "Cinta itu kayak bug, susah dicari sumbernya tapi bikin sistem crash ❤️";
-        } else if (lowerMessage.includes("halo")) {
-            return "Haaaaaaaaaaaaaaa";
-        } else if (lowerMessage.includes("siapa kamu")) {
-            return "Saya bot nya zki yang diciptakan untuk membantu kamu keluar dari zona jomblo!";
-
-        } else {
-            return responses["default"][Math.floor(Math.random() * responses["default"].length)];
-        }
+            } else if (lowerMessage.includes("siapa kamu")) {
+                return "Saya bot nya zaki yang diciptakan untuk membantu kamu keluar dari zona jomblo!";
+            } else {
+                return responses["default"][Math.floor(Math.random() * responses["default"].length)];
+            }
         }
 
-        function addMessage(content, isUser) {
+        function renderMessage(content, isUser, timestamp, shouldSave = true) {
             const chatContainer = document.getElementById('chatContainer');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
 
             const messageContent = document.createElement('div');
             messageContent.className = 'message-content';
-            messageContent.innerHTML = content + `<span class="timestamp">${getTime()}</span>`;
+            messageContent.innerHTML = content + `<span class="timestamp">${timestamp}</span>`;
 
             messageDiv.appendChild(messageContent);
             chatContainer.insertBefore(messageDiv, document.getElementById('typingIndicator'));
             chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            if (shouldSave) {
+                chatHistory.push({ content, isUser, timestamp });
+                storage.saveChat(chatHistory);
+            }
         }
 
         function showTyping() {
@@ -644,15 +936,19 @@
 
             if (message === '') return;
 
-            addMessage(message, true);
+            const timestamp = getTime();
+            renderMessage(message, true, timestamp);
             input.value = '';
+
+            updateStats();
 
             showTyping();
 
             setTimeout(() => {
                 hideTyping();
                 const response = getResponse(message);
-                addMessage(response, false);
+                const botTimestamp = getTime();
+                renderMessage(response, false, botTimestamp);
             }, 1000 + Math.random() * 1000);
         }
 
@@ -662,31 +958,263 @@
         }
 
         function clearChat() {
-            const chatContainer = document.getElementById('chatContainer');
-            chatContainer.innerHTML = `
-                <div class="message bot">
-                    <div class="message-content">
-                        Halo! Aku DanielAI, siap membantu kamu keluar dari zona jomblo! 😊 Ada yang ingin kamu tanyakan atau ceritakan?
-                        <span class="timestamp">${getTime()}</span>
+            if (confirm('Apakah Anda yakin ingin menghapus chat saat ini?')) {
+                chatHistory = [];
+                storage.saveChat(chatHistory);
+                
+                const chatContainer = document.getElementById('chatContainer');
+                chatContainer.innerHTML = `
+                    <div class="typing-indicator" id="typingIndicator">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
+                `;
+                
+                addWelcomeMessage();
+            }
+        }
+
+        function toggleProfileMenu() {
+            const menu = document.getElementById('profileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('profileMenu');
+            const logo = document.querySelector('.logo');
+            
+            if (!menu.contains(event.target) && !logo.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // Modal functions
+        function showModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = content;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        function showEditProfile() {
+            toggleProfileMenu();
+            const profile = storage.loadProfile();
+            const content = `
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; color: rgba(255, 255, 255, 0.8);">Nama:</label>
+                    <input type="text" id="profileNameInput" value="${profile.name}" 
+                           style="width: 100%; padding: 12px; background: rgba(30, 41, 59, 0.5); 
+                                  border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; 
+                                  color: white; font-size: 1em;">
                 </div>
-                <div class="typing-indicator" id="typingIndicator">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button onclick="saveProfile()" 
+                        style="width: 100%; padding: 12px; background: linear-gradient(135deg, #6366f1, #a855f7); 
+                               border: none; border-radius: 8px; color: white; font-size: 1em; 
+                               font-weight: 600; cursor: pointer;">
+                    Simpan
+                </button>
+            `;
+            showModal('Edit Profil', content);
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('profileNameInput').value.trim();
+            if (name) {
+                storage.saveProfile({ name, avatar: '👤' });
+                loadProfile();
+                closeModal();
+                alert('Profil berhasil diperbarui!');
+            }
+        }
+
+        function showHistory() {
+            toggleProfileMenu();
+            if (chatHistory.length === 0) {
+                showModal('Riwayat Chat', '<p>Belum ada riwayat chat.</p>');
+                return;
+            }
+
+            let content = '<div>';
+            const groupedChats = {};
+            
+            chatHistory.forEach((msg, index) => {
+                const date = new Date().toLocaleDateString('id-ID');
+                if (!groupedChats[date]) {
+                    groupedChats[date] = [];
+                }
+                groupedChats[date].push({ ...msg, index });
+            });
+
+            for (const [date, messages] of Object.entries(groupedChats)) {
+                content += `
+                    <div class="history-item">
+                        <div class="history-date">${date}</div>
+                        <div class="history-preview">${messages.length} pesan</div>
+                    </div>
+                `;
+            }
+            
+            content += '</div>';
+            showModal('Riwayat Chat', content);
+        }
+
+        function showSettings() {
+            toggleProfileMenu();
+            const content = `
+                <div style="color: rgba(255, 255, 255, 0.8); line-height: 1.8;">
+                    <h3 style="color: white; margin-bottom: 15px;">Pengaturan</h3>
+                    <p><strong>✅ Auto-save:</strong> Chat otomatis tersimpan</p>
+                    <p><strong>🔔 Notifikasi:</strong> Aktif</p>
+                    <p><strong>🎨 Tema:</strong> Dark Mode</p>
+                    <p><strong>💾 Penyimpanan:</strong> ${((JSON.stringify(chatHistory).length / 1024).toFixed(2))} KB</p>
+                    <br>
+                    <p style="font-size: 0.9em; opacity: 0.6;">Fitur pengaturan lengkap akan segera hadir!</p>
                 </div>
             `;
+            showModal('Pengaturan', content);
+        }
+
+        function exportChat() {
+            toggleProfileMenu();
+            
+            if (chatHistory.length === 0) {
+                alert('Tidak ada chat untuk di-export!');
+                return;
+            }
+
+            let text = '=== DanielAI Chat Export ===\n';
+            text += `Tanggal: ${new Date().toLocaleString('id-ID')}\n\n`;
+            
+            chatHistory.forEach(msg => {
+                const sender = msg.isUser ? 'Kamu' : 'DanielAI';
+                text += `[${msg.timestamp}] ${sender}: ${msg.content}\n\n`;
+            });
+
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `DanielAI_Chat_${new Date().getTime()}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            alert('Chat berhasil di-export!');
+        }
+
+        function showAbout() {
+            toggleProfileMenu();
+            const content = `
+                <div style="text-align: center; color: rgba(255, 255, 255, 0.8);">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #6366f1, #a855f7); 
+                                border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+                                font-size: 40px; margin: 0 auto 20px; box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);">
+                        💬
+                    </div>
+                    <h2 style="color: white; margin-bottom: 10px;">DanielAI v2.0</h2>
+                    <p style="margin-bottom: 20px; opacity: 0.6;">Konsultan Pribadi untuk Para Jomblo</p>
+                    <p style="line-height: 1.8; text-align: left;">
+                        DanielAI adalah chatbot AI yang dirancang khusus untuk membantu kamu dalam berbagai aspek kehidupan percintaan, mulai dari PDKT, tips chat, move on, hingga meningkatkan kepercayaan diri.
+                    </p>
+                    <br>
+                    <p style="font-size: 0.9em; opacity: 0.6;">
+                        Created with ❤️ by ZAKI<br>
+                        © 2025 DanielAI. All rights reserved.
+                    </p>
+                </div>
+            `;
+            showModal('Tentang DanielAI', content);
+        }
+
+        function showHelp() {
+            toggleProfileMenu();
+            const content = `
+                <div style="color: rgba(255, 255, 255, 0.8); line-height: 1.8;">
+                    <h3 style="color: white; margin-bottom: 15px;">📖 Panduan Penggunaan</h3>
+                    
+                    <p><strong>💬 Cara Menggunakan:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>Ketik pertanyaan atau curhat kamu di kolom input</li>
+                        <li>Tekan Enter atau klik tombol Kirim</li>
+                        <li>Gunakan suggestion chips untuk pertanyaan cepat</li>
+                    </ul>
+
+                    <p><strong>🎯 Topik yang Bisa Ditanyakan:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>Cara PDKT yang baik</li>
+                        <li>Tips chatting menarik</li>
+                        <li>Cara move on dari mantan</li>
+                        <li>Meningkatkan percaya diri</li>
+                        <li>Tips pacaran sehat</li>
+                        <li>Dan banyak lagi!</li>
+                    </ul>
+
+                    <p><strong>💾 Fitur:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Chat tersimpan otomatis (localStorage)</li>
+                        <li>Export chat ke file txt</li>
+                        <li>Statistik penggunaan</li>
+                        <li>Profile customization</li>
+                    </ul>
+                </div>
+            `;
+            showModal('Bantuan', content);
+        }
+
+        function clearAllData() {
+            toggleProfileMenu();
+            
+            if (confirm('⚠️ PERINGATAN!\n\nIni akan menghapus SEMUA data termasuk:\n• Semua riwayat chat\n• Profil pengguna\n• Statistik\n\nApakah Anda yakin?')) {
+                if (confirm('Apakah Anda BENAR-BENAR yakin? Tindakan ini tidak dapat dibatalkan!')) {
+                    storage.clearAll();
+                    chatHistory = [];
+                    
+                    const chatContainer = document.getElementById('chatContainer');
+                    chatContainer.innerHTML = `
+                        <div class="typing-indicator" id="typingIndicator">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    `;
+                    
+                    // Reset profile
+                    storage.saveProfile({ name: 'Pengguna', avatar: '👤' });
+                    storage.saveStats({ totalChats: 0, firstUse: new Date().toISOString() });
+                    
+                    loadProfile();
+                    loadStats();
+                    addWelcomeMessage();
+                    
+                    alert('✅ Semua data berhasil dihapus!');
+                }
+            }
         }
 
         function toggleTheme() {
             alert('Fitur tema akan segera hadir! 🌙✨');
         }
 
+        // Event listeners
         document.getElementById('userInput').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 sendMessage();
             }
         });
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Initialize on load
+        window.addEventListener('load', init);
     </script>
 </body>
 
